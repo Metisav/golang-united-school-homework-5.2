@@ -47,7 +47,7 @@ func (cache *Cache) PutTill(key, value string, deadline time.Time) {
 func (cache *Cache) cleanup() {
 	current_time := time.Now()
 	for k, v := range cache.Map {
-		if v.deadline.Before(current_time) {
+		if v.deadline != nil && v.deadline.Before(current_time) {
 			delete(cache.Map, k)
 		}
 	}
